@@ -1,15 +1,17 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { MyRunsPage } from "./pages/MyRunsPage";
+import { OnboardingPage } from "./pages/OnboardingPage";
 
 export const Routes: React.FC = () => {
   return (
     <Router>
       <Switch>
         <Route path="/onboarding">
-          <div>Onboarding</div>
+          <OnboardingPage />
         </Route>
         <Route path="*">
-          <div>Hello, world</div>
+          <MyRunsPage />
         </Route>
       </Switch>
     </Router>
