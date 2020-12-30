@@ -1,5 +1,6 @@
 import { Box } from "@chakra-ui/react";
 import React from "react";
+import { AppProvider } from "./providers/AppProvider";
 import { Routes } from "./Routes";
 
 // Onboarding flow
@@ -9,7 +10,9 @@ import { Routes } from "./Routes";
 function App() {
   return (
     <Box data-testid="app">
-      <Routes />
+      <AppProvider>
+        <Routes />
+      </AppProvider>
     </Box>
   );
 }
