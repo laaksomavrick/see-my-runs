@@ -1,6 +1,7 @@
-import { Box } from "@chakra-ui/react";
-import React from "react";
+import { Box, useControllableState } from "@chakra-ui/react";
+import React, { useContext } from "react";
 import { Switch, Route, useRouteMatch, Redirect } from "react-router-dom";
+import { OnboardingEnterNamePage } from "./OnboardingEnterNamePage";
 
 export const OnboardingPage: React.FC = () => {
   let { path } = useRouteMatch();
@@ -10,7 +11,7 @@ export const OnboardingPage: React.FC = () => {
     <Box data-testid="onboardingPage">
       <Switch>
         <Route path={`${safePath}/name`}>
-          <div>Enter a name</div>
+          <OnboardingEnterNamePage />
         </Route>
         <Route path={`${safePath}/location`}>
           <div>Enter a location</div>
