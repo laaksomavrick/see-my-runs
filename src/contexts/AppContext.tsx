@@ -2,7 +2,10 @@ import { createContext, Dispatch, SetStateAction } from "react";
 
 export interface IRequiredData {
   name?: string;
-  location?: any;
+  location?: {
+    latitude: number;
+    longitude: number;
+  };
 }
 
 export interface IAppState {
@@ -44,6 +47,8 @@ export function isIAppState(data: any): data is IAppState {
   return (
     maybeRequiredData != null &&
     maybeRequiredData.name != null &&
-    maybeRequiredData.location != null
+    maybeRequiredData.location != null &&
+    maybeRequiredData.location.latitude != null &&
+    maybeRequiredData.location.longitude != null
   );
 }
