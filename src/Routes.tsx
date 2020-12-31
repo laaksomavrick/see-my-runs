@@ -30,7 +30,6 @@ export const Routes: React.FC = () => {
 
   return (
     <Box>
-      {debug()}
       <Box h="100vh">
         <Box h="100%" p={[4]}>
           <Router>
