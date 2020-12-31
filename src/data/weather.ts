@@ -79,5 +79,6 @@ export const mapWeatherData = (dailies: any[]): Weather[] => {
 };
 
 const getHumanizedTemperature = (temp: number): string => {
-  return `${temp} °C`;
+  const rounded = Math.round(temp);
+  return `${rounded} °C`;
 };

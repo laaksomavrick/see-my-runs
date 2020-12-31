@@ -1,5 +1,7 @@
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Spinner } from "@chakra-ui/react";
 import React, { useContext, useEffect, useState } from "react";
+import { Greeting } from "../components/Greeting";
+import { MyRunList } from "../components/MyRunList";
 import { AppContext } from "../contexts/AppContext";
 import { getWeatherData, Weather } from "../data/weather";
 
@@ -30,12 +32,18 @@ export const MyRunsPage: React.FC = () => {
     })();
   }, [state, setWeather, setError]);
 
+  if (error) {
+    return <div>something went wrong</div>;
+  }
+
+  if (loading || weather === undefined) {
+    return <Spinner size="xl" />;
+  }
+
   return (
     <Box data-testid="myRunsPage">
-      <div>loading: {loading}</div>
-      <div>error: {error}</div>
-      <div>data: {JSON.stringify(weather)}</div>
-      <Text>See my runs!!!</Text>
+      <Greeting name={state.requiredData?.name || ""} />
+      <MyRunList days={weather} />
     </Box>
   );
 };
