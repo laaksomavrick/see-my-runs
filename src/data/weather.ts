@@ -3,6 +3,10 @@ import fromUnixTime from "date-fns/fromUnixTime";
 
 const API_KEY = "9a8edfa0d4a7bff7a326dfea81f673af";
 
+// TODO: leverage caching (3hrs) in localStorage
+
+export type WeatherType = "Clear" | "Clouds" | "Snow" | "Rain";
+
 export interface Weather {
   date: Date;
   humanizedDate: string;
@@ -19,7 +23,7 @@ export interface Weather {
     evening: string;
   };
   humidity: number;
-  weatherType: "Clear" | "Clouds" | "Snow" | "Rain";
+  weatherType: WeatherType;
   weatherDescription: string;
 }
 

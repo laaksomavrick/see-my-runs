@@ -1,5 +1,12 @@
-import { Flex, Text } from "@chakra-ui/react";
-import { Weather } from "../data/weather";
+import { Flex, Icon, Text } from "@chakra-ui/react";
+import { Weather, WeatherType } from "../data/weather";
+import {
+  IoWater,
+  IoSunny,
+  IoPartlySunny,
+  IoSnow,
+  IoRainy,
+} from "react-icons/io5";
 
 export const MyRunList: React.FC<{ days: Weather[] }> = ({ days }) => {
   return (
@@ -13,15 +20,70 @@ export const MyRunList: React.FC<{ days: Weather[] }> = ({ days }) => {
 
 export const MyRunListItem: React.FC<{ day: Weather }> = ({ day }) => {
   return (
-    <Flex direction="column" py={[2]}>
-      <Flex pb={[1]}>
-        <Text fontWeight="semibold">{day.humanizedDate}</Text>
+    <Flex
+      direction="column"
+      border="1px solid"
+      borderColor="gray.200"
+      borderRadius="2px"
+      p={[4]}
+    >
+      {/* header */}
+      <Flex pb={[2]} alignItems="center">
+        <Text fontSize="2xl" fontWeight="semibold">
+          {day.humanizedDate}
+        </Text>
+        <Flex alignItems="center" ml="auto" width="auto">
+          <HumidityIndicator humidity={day.humidity} />
+          <ConditionsIndicator conditions={day.weatherType} />
+        </Flex>
       </Flex>
-      <Text>Humidity: {day.humidity}%</Text>
-      <Text>Conditions: {day.weatherType}</Text>
+      {/* temperature container */}
       <Flex>
         <MyRunListDailyTemperature day={day} />
       </Flex>
+    </Flex>
+  );
+};
+
+export const HumidityIndicator: React.FC<{ humidity: number }> = ({
+  humidity,
+}) => {
+  return (
+    <Flex alignItems="flex-end">
+      <Icon as={IoWater} w={8} h={8} color="blue.400" />
+      <Text fontSize="xl">{`${humidity}%`}</Text>
+    </Flex>
+  );
+};
+
+export const ConditionsIndicator: React.FC<{ conditions: WeatherType }> = ({
+  conditions,
+}) => {
+  let icon;
+  let color = "gray.400";
+  switch (conditions) {
+    case "Clear":
+      icon = IoSunny;
+      color = "yellow.400";
+      break;
+    case "Clouds":
+      icon = IoPartlySunny;
+      break;
+    case "Snow":
+      icon = IoSnow;
+      color = "blue.200";
+      break;
+    case "Rain":
+      icon = IoRainy;
+      color = "blue.400";
+      break;
+    default:
+      break;
+  }
+
+  return (
+    <Flex ml={[4]}>
+      <Icon as={icon} w={8} h={8} color={color} />
     </Flex>
   );
 };
