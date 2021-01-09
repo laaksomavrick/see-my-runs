@@ -9,6 +9,11 @@ import {
 } from "react-icons/io5";
 import React from "react";
 
+// What is a good run period?
+// Conditions are acceptable
+// Humidity is acceptable
+// Temperature is acceptable
+
 export const MyRunList: React.FC<{ days: Weather[] }> = ({ days }) => {
   return (
     <Grid

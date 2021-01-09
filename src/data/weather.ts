@@ -1,7 +1,7 @@
 import format from "date-fns/format";
 import fromUnixTime from "date-fns/fromUnixTime";
 
-const API_KEY = "9a8edfa0d4a7bff7a326dfea81f673af";
+const API_KEY = process.env.REACT_APP_OPEN_WEATHER_MAP_API_KEY;
 
 // TODO: leverage caching (3hrs) in localStorage
 
