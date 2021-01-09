@@ -1,4 +1,4 @@
-import { Flex, Icon, Text } from "@chakra-ui/react";
+import { Box, Flex, Grid, Icon, Text } from "@chakra-ui/react";
 import { Weather, WeatherType } from "../data/weather";
 import {
   IoWater,
@@ -7,14 +7,19 @@ import {
   IoSnow,
   IoRainy,
 } from "react-icons/io5";
+import React from "react";
 
 export const MyRunList: React.FC<{ days: Weather[] }> = ({ days }) => {
   return (
-    <Flex direction="column">
+    <Grid
+      templateColumns={["repeat(auto-fit, minmax(450px, 1fr))"]}
+      justifyItems="center"
+      gap={6}
+    >
       {days.map((d) => (
         <MyRunListItem key={d.date.toString()} day={d} />
       ))}
-    </Flex>
+    </Grid>
   );
 };
 
@@ -25,10 +30,12 @@ export const MyRunListItem: React.FC<{ day: Weather }> = ({ day }) => {
       border="1px solid"
       borderColor="gray.200"
       borderRadius="2px"
+      w="100%"
+      maxW="450px"
       p={[4]}
     >
       {/* header */}
-      <Flex pb={[2]} alignItems="center">
+      <Flex pb={[4]} alignItems="center">
         <Text fontSize="2xl" fontWeight="semibold">
           {day.humanizedDate}
         </Text>
@@ -93,20 +100,27 @@ export const MyRunListDailyTemperature: React.FC<{ day: Weather }> = ({
 }) => {
   const temps = day.humanizedTemperature;
   return (
+    <Flex justifyContent="space-between" width="100%">
+      <DailyTemperature label="Morning" temperature={temps.morning} />
+      <DailyTemperature label="Day" temperature={temps.day} />
+      <DailyTemperature label="Evening" temperature={temps.evening} />
+      <DailyTemperature label="Night" temperature={temps.night} />
+    </Flex>
+  );
+};
+
+export const DailyTemperature: React.FC<{
+  label: string;
+  temperature: string;
+}> = ({ label, temperature }) => {
+  return (
     <Flex direction="column">
-      <Text>Temperatures</Text>
-      <Flex>
-        <Text fontWeight="">Morning: {temps.morning}</Text>
-      </Flex>
-      <Flex>
-        <Text fontWeight="">Day: {temps.day}</Text>
-      </Flex>
-      <Flex>
-        <Text fontWeight="">Evening: {temps.evening}</Text>
-      </Flex>
-      <Flex>
-        <Text fontWeight="">Night: {temps.night}</Text>
-      </Flex>
+      <Text fontSize="xl" fontWeight="">
+        {label}
+      </Text>
+      <Box>
+        <Text fontSize="2xl">{temperature}</Text>
+      </Box>
     </Flex>
   );
 };
