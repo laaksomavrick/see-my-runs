@@ -10,6 +10,7 @@ export type WeatherType = "Clear" | "Clouds" | "Snow" | "Rain";
 export interface Weather {
   date: Date;
   humanizedDate: string;
+  humanizedDayOfWeek: string;
   temperature: {
     day: number;
     night: number;
@@ -48,7 +49,8 @@ export const mapWeatherData = (dailies: any[]): Weather[] => {
 
   for (const daily of dailies) {
     const date = fromUnixTime(daily.dt);
-    const humanizedDate = format(date, "EEEE");
+    const humanizedDate = format(date, "LLLL do");
+    const humanizedDayOfWeek = format(date, "EEEE");
     const temperature = daily.temp;
     const humidity = daily.humidity;
 
@@ -59,6 +61,7 @@ export const mapWeatherData = (dailies: any[]): Weather[] => {
     const data: Weather = {
       date,
       humanizedDate,
+      humanizedDayOfWeek,
       temperature: {
         day: temperature.day,
         evening: temperature.eve,

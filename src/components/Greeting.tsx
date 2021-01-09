@@ -4,7 +4,12 @@ import { isBefore } from "date-fns";
 export const Greeting: React.FC<{ name: string }> = ({ name }) => {
   return (
     <Flex direction="column" pb={[4]}>
-      <Text fontSize="4xl" fontWeight="bold" textAlign="center">
+      <Text
+        fontSize="4xl"
+        fontWeight="bold"
+        textAlign="center"
+        userSelect="none"
+      >
         {getGreeting(name)}
       </Text>
     </Flex>

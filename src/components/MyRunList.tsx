@@ -32,13 +32,19 @@ export const MyRunListItem: React.FC<{ day: Weather }> = ({ day }) => {
       borderRadius="2px"
       w="100%"
       maxW="450px"
+      userSelect="none"
       p={[4]}
     >
       {/* header */}
       <Flex pb={[4]} alignItems="center">
-        <Text fontSize="2xl" fontWeight="semibold">
-          {day.humanizedDate}
-        </Text>
+        <Flex direction="column">
+          <Text fontSize="2xl" fontWeight="semibold">
+            {day.humanizedDayOfWeek}
+          </Text>
+          <Text fontSize="sm" color="gray.400" marginTop="-6px">
+            {day.humanizedDate}
+          </Text>
+        </Flex>
         <Flex alignItems="center" ml="auto" width="auto">
           <HumidityIndicator humidity={day.humidity} />
           <ConditionsIndicator conditions={day.weatherType} />
